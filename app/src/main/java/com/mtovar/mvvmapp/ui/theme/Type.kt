@@ -2,9 +2,15 @@ package com.mtovar.mvvmapp.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+
+val MerriweatherSans = FontFamily(
+    Font(com.mtovar.mvvmapp.R.font.merriweather_sans_regular, FontWeight.Normal),
+    Font(com.mtovar.mvvmapp.R.font.merriweather_sans_bold, FontWeight.Bold)
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(

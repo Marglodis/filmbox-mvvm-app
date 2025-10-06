@@ -1,8 +1,7 @@
-package com.mtovar.mvvmapp.view.auth
+package com.mtovar.mvvmapp.view.auth.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,20 +22,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mtovar.mvvmapp.R
 import com.mtovar.mvvmapp.ui.theme.MerriweatherSans
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    loginViewModel: LoginViewModel = viewModel()
+) {
+    val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
+
+    //var user by remember { mutableStateOf("") }
+    //var password by remember { mutableStateOf("") }
     Scaffold { padding ->
         Column(
             Modifier
@@ -65,18 +69,16 @@ fun LoginScreen() {
             )
             Spacer(modifier = Modifier.weight(1f))
 
-
-            var user by remember { mutableStateOf("") }
             TextField(
-                value = user, onValueChange = { user = it },
+                value = uiState.user, onValueChange = { loginViewModel.onUserChanged(it) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(15)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
-            var password by remember { mutableStateOf("") }
+
             TextField(
-                value = password, onValueChange = { password = it },
+                value = uiState.password, onValueChange = { loginViewModel.onPasswordChanged(it) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(15)
             )
@@ -84,8 +86,11 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(
+                enabled = uiState.isLoginEnabled,
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.surface,
+                    disabledContainerColor = MaterialTheme.colorScheme.tertiary
                 ), onClick = { /*TODO*/ }) {
                 Text(
                     text = "Iniciar Sesión",
