@@ -41,11 +41,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.mtovar.mvvmapp.R
 
 @Composable
 fun RegisterScreen(
-
+    registerViewModel: RegisterViewModel = viewModel(),
+    navigateToLogin: () -> Unit
 ){
     Scaffold { padding ->
         Column(
@@ -80,7 +82,7 @@ fun RegisterScreen(
                 fontWeight = FontWeight.Light)
             HorizontalDivider()
 
-            ButtonsFoot()
+            ButtonsFoot(navigateToLogin)
 
         }
 
@@ -112,12 +114,12 @@ fun ButtonsRegister(){
 }
 
 @Composable
-fun ButtonsFoot(){
+fun ButtonsFoot(navigateToLogin: () -> Unit){
 
     Row (Modifier.width(300.dp)
         .padding(20.dp),
         horizontalArrangement = Arrangement.Center) {
-        TextButton(onClick = {}) {
+        TextButton(onClick = {navigateToLogin}) {
             Text("¿Tienes una cuenta?")
         }
         TextButton(onClick = {}) {

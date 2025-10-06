@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -35,7 +36,9 @@ import com.mtovar.mvvmapp.ui.theme.MerriweatherSans
 
 @Composable
 fun LoginScreen(
-    loginViewModel: LoginViewModel = viewModel()
+    loginViewModel: LoginViewModel = viewModel(),
+    navigateToRegister: () -> Unit,
+    navigateToHome: () -> Unit
 ) {
     val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
 
@@ -93,7 +96,7 @@ fun LoginScreen(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.surface,
                     disabledContainerColor = MaterialTheme.colorScheme.tertiary
-                ), onClick = { /*TODO*/ }) {
+                ), onClick = { navigateToHome() }) {
                 Text(
                     text = "Iniciar Sesión",
                     color = MaterialTheme.colorScheme.background,
@@ -107,6 +110,11 @@ fun LoginScreen(
         }
 
     }
-
-
 }
+
+@Preview
+@Composable
+fun LoginScreenPreview() {
+    LoginScreen (navigateToRegister = {}, navigateToHome = {})
+}
+
