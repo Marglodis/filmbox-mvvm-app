@@ -11,7 +11,7 @@ import com.mtovar.mvvmapp.view.register.RegisterScreen
 fun AppNavigation(){
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = Register) {
+    NavHost(navController = navController, startDestination = Login) {
         composable<Login> { LoginScreen() }
 
         composable<Register> { RegisterScreen() }

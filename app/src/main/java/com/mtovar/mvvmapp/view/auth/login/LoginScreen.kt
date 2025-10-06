@@ -72,7 +72,8 @@ fun LoginScreen(
             TextField(
                 value = uiState.user, onValueChange = { loginViewModel.onUserChanged(it) },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(15)
+                shape = RoundedCornerShape(15),
+                singleLine = true
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -80,7 +81,8 @@ fun LoginScreen(
             TextField(
                 value = uiState.password, onValueChange = { loginViewModel.onPasswordChanged(it) },
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(15)
+                shape = RoundedCornerShape(15),
+                singleLine = true
             )
 
             Spacer(modifier = Modifier.weight(1f))
