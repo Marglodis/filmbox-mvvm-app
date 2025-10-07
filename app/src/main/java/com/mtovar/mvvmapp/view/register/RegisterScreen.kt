@@ -48,24 +48,26 @@ import com.mtovar.mvvmapp.R
 fun RegisterScreen(
     registerViewModel: RegisterViewModel = viewModel(),
     navigateToLogin: () -> Unit
-){
+) {
     Scaffold { padding ->
         Column(
             Modifier
-            .padding(padding)
-            .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.background),
+                .padding(padding)
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             Spacer(Modifier.weight(1f))
             Image(
                 modifier = Modifier.size(150.dp),
                 painter = painterResource(R.drawable.logo_app),
                 contentDescription = "Logo de la App"
             )
-            Text(text = "Regístrate para acceder\na tu caja de películas",
+            Text(
+                text = "Regístrate para acceder\na tu caja de películas",
                 textAlign = TextAlign.Center,
-                fontSize = 20.sp)
+                fontSize = 20.sp
+            )
 
 
             Spacer(Modifier.weight(1f))
@@ -75,12 +77,14 @@ fun RegisterScreen(
             ButtonsRegister()
 
             Spacer(Modifier.weight(1f))
-            Text(text = "Al registrate, aceptas nuestras\nCondiciones y Política de privacidad",
+            Text(
+                text = "Al registrate, aceptas nuestras\nCondiciones y Política de privacidad",
                 Modifier.padding(20.dp),
                 textAlign = TextAlign.Center,
                 fontSize = 14.sp,
-                fontWeight = FontWeight.Light)
-            HorizontalDivider()
+                fontWeight = FontWeight.Light
+            )
+            HorizontalDivider(modifier = Modifier.size(100.dp))
 
             ButtonsFoot(navigateToLogin)
 
@@ -92,11 +96,14 @@ fun RegisterScreen(
 
 
 @Composable
-fun ButtonsRegister(){
+fun ButtonsRegister() {
 
-    Column (Modifier.fillMaxWidth()
-        .padding(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Button(
             onClick = {},
             modifier = Modifier
@@ -114,20 +121,30 @@ fun ButtonsRegister(){
 }
 
 @Composable
-fun ButtonsFoot(navigateToLogin: () -> Unit){
+fun ButtonsFoot(navigateToLogin: () -> Unit) {
 
-    Row (Modifier.width(300.dp)
-        .padding(20.dp),
-        horizontalArrangement = Arrangement.Center) {
-        TextButton(onClick = {navigateToLogin}) {
-            Text("¿Tienes una cuenta?")
-        }
-        TextButton(onClick = {}) {
-            Text("Entrar", fontWeight = FontWeight.Bold)
+    Row(
+        Modifier
+            .width(300.dp)
+            .padding(20.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Text("¿Tienes una cuenta?")
+        Spacer(Modifier.width(10.dp))
+
+        TextButton(onClick = { navigateToLogin() }) {
+            Text(
+                "Entrar",
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.surface
+            )
         }
 
     }
 }
+
 @Composable
 
 fun FormRegisterParent() {
@@ -137,7 +154,9 @@ fun FormRegisterParent() {
     var password by remember { mutableStateOf("") }
 
     Column(
-        Modifier.fillMaxWidth().padding(20.dp),
+        Modifier
+            .fillMaxWidth()
+            .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         CustomTextField(

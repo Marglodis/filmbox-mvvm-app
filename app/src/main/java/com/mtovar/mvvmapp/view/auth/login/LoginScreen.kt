@@ -1,5 +1,6 @@
 package com.mtovar.mvvmapp.view.auth.login
 
+import android.R.attr.label
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -12,9 +13,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -76,7 +80,20 @@ fun LoginScreen(
                 value = uiState.user, onValueChange = { loginViewModel.onUserChanged(it) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(15),
-                singleLine = true
+                singleLine = true,
+                label = { Text("Nombre de usuario") },
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = MaterialTheme.colorScheme.surface,
+                    unfocusedContainerColor = Color.White,
+                    focusedTextColor = MaterialTheme.colorScheme.background,
+                    unfocusedTextColor = MaterialTheme.colorScheme.background,
+                    focusedIndicatorColor = Color.Transparent, // sin línea inferior
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                    cursorColor = MaterialTheme.colorScheme.background,
+                    focusedLabelColor = MaterialTheme.colorScheme.background.copy(alpha = 0.7f),
+                    unfocusedLabelColor = MaterialTheme.colorScheme.background.copy(alpha = 0.5f)
+                )
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -85,7 +102,20 @@ fun LoginScreen(
                 value = uiState.password, onValueChange = { loginViewModel.onPasswordChanged(it) },
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(15),
-                singleLine = true
+                singleLine = true,
+                label = { Text("Contraseña") },
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = MaterialTheme.colorScheme.surface,
+                    unfocusedContainerColor = Color.White,
+                    focusedTextColor = MaterialTheme.colorScheme.background,
+                    unfocusedTextColor = MaterialTheme.colorScheme.background,
+                    focusedIndicatorColor = Color.Transparent, // sin línea inferior
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                    cursorColor = MaterialTheme.colorScheme.background,
+                    focusedLabelColor = MaterialTheme.colorScheme.background.copy(alpha = 0.7f),
+                    unfocusedLabelColor = MaterialTheme.colorScheme.background.copy(alpha = 0.5f)
+                )
             )
 
             Spacer(modifier = Modifier.weight(1f))
@@ -106,7 +136,18 @@ fun LoginScreen(
             }
             Spacer(modifier = Modifier.weight(4f))
 
-
+            OutlinedButton(
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.inverseOnSurface,
+                ), onClick = { navigateToRegister() }) {
+                Text(
+                    text = "Registrarse",
+                    color = MaterialTheme.colorScheme.background,
+                    fontFamily = MerriweatherSans,
+                    fontWeight = FontWeight.Normal
+                )
+            }
         }
 
     }
