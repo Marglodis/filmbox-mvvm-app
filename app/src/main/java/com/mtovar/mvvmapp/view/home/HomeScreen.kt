@@ -22,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -115,6 +116,23 @@ fun HomeScreen(
                     ) {
                         items(uiState.movies) { movie ->
                             MovieCard(movie = movie)
+                        }
+
+                        //Item centilena para detectar scroll infinito
+                        item {
+                            if (uiState.hasMorePages){
+                                LaunchedEffect(
+                                    key1 = uiState.currentPage
+                                ) {
+                                    homeViewModel.loadNextPage()
+                                }
+                                Box(){
+                                    CircularProgressIndicator(
+                                        modifier = Modifier.align(Alignment.Center),
+                                        color = Amber400
+                                    )
+                                }
+                            }
                         }
                     }
                 }
