@@ -38,6 +38,10 @@ import com.mtovar.mvvmapp.ui.theme.Slate200
 import com.mtovar.mvvmapp.view.home.components.MovieCard
 
 @OptIn(ExperimentalMaterial3Api::class)
+/**
+ * Composable function that displays the home screen of the application.
+ * @param homeViewModel The view model for the home screen.
+ */
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = viewModel()
@@ -141,7 +145,9 @@ fun HomeScreen(
     }
 }
 
-
+/**
+ * A preview for the home screen.
+ */
 @Preview
 @Composable
 fun HomeScreenPreview() {

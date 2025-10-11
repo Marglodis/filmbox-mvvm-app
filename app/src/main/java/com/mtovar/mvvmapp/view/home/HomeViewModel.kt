@@ -11,14 +11,24 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for the home screen.
+ */
 class HomeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
+    /**
+     * The UI state for the home screen.
+     */
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     init {
         fetchPopularMovies()
     }
 
+    /**
+     * Fetches popular movies from the API.
+     * @param page The page to fetch.
+     */
     fun fetchPopularMovies(page: Int = 1) {
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = page == 1) }
@@ -51,6 +61,9 @@ class HomeViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Loads the next page of popular movies.
+     */
     fun loadNextPage() {
         if (!_uiState.value.isLoadingMore && _uiState.value.hasMorePages) {
             _uiState.update { it.copy(isLoadingMore = true) }
@@ -59,6 +72,9 @@ class HomeViewModel : ViewModel() {
 
     }
 
+    /**
+     * Retries fetching popular movies.
+     */
     fun retry() {
         _uiState.update { it.copy(errorMessage = null, currentPage = 1, isLoadingMore = false) }
         fetchPopularMovies()
@@ -66,6 +82,15 @@ class HomeViewModel : ViewModel() {
 
 }
 
+/**
+ * Represents the UI state for the home screen.
+ * @property isLoading Whether the screen is currently loading.
+ * @property movies The list of popular movies.
+ * @property errorMessage The error message, if any.
+ * @property hasMorePages Whether there are more pages to load.
+ * @property currentPage The current page.
+ * @property isLoadingMore Whether more movies are being loaded.
+ */
 data class HomeUiState(
     val isLoading: Boolean = false,
     val movies: List<Movie> = emptyList(),

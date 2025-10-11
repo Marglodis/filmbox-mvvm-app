@@ -8,6 +8,10 @@ import com.mtovar.mvvmapp.view.auth.login.LoginScreen
 import com.mtovar.mvvmapp.view.home.HomeScreen
 import com.mtovar.mvvmapp.view.register.RegisterScreen
 
+/**
+ * The main navigation component of the application.
+ * It hosts all the different screens and manages navigation between them.
+ */
 @Composable
 fun AppNavigation(){
     val navController = rememberNavController()

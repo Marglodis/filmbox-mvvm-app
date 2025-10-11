@@ -46,8 +46,6 @@ fun LoginScreen(
 ) {
     val uiState by loginViewModel.uiState.collectAsStateWithLifecycle()
 
-    //var user by remember { mutableStateOf("") }
-    //var password by remember { mutableStateOf("") }
     Scaffold { padding ->
         Column(
             Modifier
